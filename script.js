@@ -70,6 +70,9 @@ function renderQuestions() {
         sessionStorage.setItem("progress",JSON.stringify(userAnswers));
         console.log("updated array ",userAnswers);
         console.log("question ka answer ",question.answer);
+	    if(localStorage.getItem("score")!==null){
+          score = Number(localStorage.getItem("score"));
+        }
         if(e.target.value===question.answer){
           console.log("correct answer")
           score++;
@@ -78,7 +81,7 @@ function renderQuestions() {
         }
         localStorage.setItem("score",score);
       });
-
+   
       if (i<userAnswers.length && userAnswers[i] === choice) {
         console.log("inside this");
         choiceElement.setAttribute("checked", true);
