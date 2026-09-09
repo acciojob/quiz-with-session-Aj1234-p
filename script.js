@@ -53,19 +53,6 @@ function renderQuestions() {
       choiceElement.setAttribute("value", choice);
 
       choiceElement.addEventListener('input',(e)=>{
-        if(userAnswers.length>1){
-        const existingData = sessionStorage.getItem("progress");
-        if(existingData){
-          try{
-            userAnswers = JSON.parse(sessionStorage.getItem("progress"));
-            if(!Array.isArray(userAnswers)){
-              userAnswers = [];
-            }
-          }catch(err){
-              userAnswers = [];
-          }
-        }
-      }
         userAnswers[i]=e.target.value;
         sessionStorage.setItem("progress",JSON.stringify(userAnswers));
         console.log("updated array ",userAnswers);
@@ -87,7 +74,7 @@ function renderQuestions() {
         choiceElement.setAttribute("checked", true);
       }
 
-	     if(localStorage.getItem("score")!==null){
+    if(localStorage.getItem("score")!==null){
         let FinalScore = localStorage.getItem("score");
         console.log("final score is ",FinalScore)
         finalScore.textContent = `Your score is ${FinalScore} out of 5.`;
