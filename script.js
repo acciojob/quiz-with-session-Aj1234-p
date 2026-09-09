@@ -87,6 +87,11 @@ function renderQuestions() {
         choiceElement.setAttribute("checked", true);
       }
 
+	     if(localStorage.getItem("score")!==null){
+        let FinalScore = localStorage.getItem("score");
+        console.log("final score is ",FinalScore)
+        finalScore.textContent = `Your score is ${FinalScore} out of 5.`;
+      }	
       const choiceText = document.createTextNode(choice);
       questionElement.appendChild(choiceElement);
       questionElement.appendChild(choiceText);
