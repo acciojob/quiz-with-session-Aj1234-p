@@ -32,12 +32,12 @@ const questions = [
 
 // Display the quiz questions and choices
 function renderQuestions() {
+  let userAnswers = JSON.parse(sessionStorage.getItem("progress")) || [];
   for (let i = 0; i < questions.length; i++) {
     const question = questions[i];
     const questionElement = document.createElement("div");
     const questionText = document.createTextNode(question.question);
     console.log("session storage to comes from the data ", sessionStorage.getItem("progress"));
-    let userAnswers = JSON.parse(sessionStorage.getItem("progress")) || [];
     if(typeof userAnswers==="object"){
       console.log("found by a session storage to a user answer ",userAnswers.length);
     }else{
@@ -57,7 +57,7 @@ function renderQuestions() {
         sessionStorage.setItem("progress",JSON.stringify(userAnswers));
         console.log("updated array ",userAnswers);
         console.log("question ka answer ",question.answer);
-	    if(localStorage.getItem("score")!==null){
+        if(localStorage.getItem("score")!==null){
           score = Number(localStorage.getItem("score"));
         }
         if(e.target.value===question.answer){
@@ -68,17 +68,17 @@ function renderQuestions() {
         }
         localStorage.setItem("score",score);
       });
-   
+
       if (i<userAnswers.length && userAnswers[i] === choice) {
         console.log("inside this");
-        choiceElement.setAttribute("checked", true);
+        choiceElement.checked = true;
       }
-
-    if(localStorage.getItem("score")!==null){
+     
+      if(localStorage.getItem("score")!==null){
         let FinalScore = localStorage.getItem("score");
         console.log("final score is ",FinalScore)
         finalScore.textContent = `Your score is ${FinalScore} out of 5.`;
-      }	
+      }
       const choiceText = document.createTextNode(choice);
       questionElement.appendChild(choiceElement);
       questionElement.appendChild(choiceText);
